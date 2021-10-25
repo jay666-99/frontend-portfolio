@@ -1,63 +1,67 @@
-// listen for form submit
-document.getElementById('myForm').addEventListener('submit',saveBookmark);
+//listen for form submit 
+document.getElementById('myForm').addEventListener('submit', saveBookmark); 
 
-// save bookmark
+//Save Bookmark
 function saveBookmark(e) {
-    // get form values
+    //Get form values
     var siteName = document.getElementById('siteName').value;
     var siteUrl = document.getElementById('siteUrl').value;
 
-    siteUrl = fixUrl(siteUrl);
-
-    if(!validateForm(siteName, siteUrl)){
-        e.preventDefault();
+    if (!validateForm(siteName, siteUrl)) {
         return false;
     }
-  
+
     var bookmark = {
-        name: siteName,
+        name: siteName, 
         url: siteUrl
     }
-    // test if bookmarks is null
-    if (localStorage.getItem('bookmarks') === null){
-        // init array
-        var bookmarks = [];
-        // add to array
-        bookmarks.push(bookmark);
-        // set to localStorage
+
+    //Test if bookmark is null 
+    if(localStorage.getItem('bookmarks') === null) {
+        //Init array
+        var bookmarks = []; 
+        bookmarks.push(bookmark); 
+        //Set to localStorage
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     } else {
-        // get bookmarks from LocalStorage
+        //Get bookmarks from localStorage
         var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
-        // add bookmark to array
+        //Add bookmark to array
         bookmarks.push(bookmark);
-        // re-set back to localStorage
+        //Re-set back to localStorage
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
-    }    
+    }
 
-    fetchBookmarks();
-    //clear form
+    //Clear Form
     document.getElementById('myForm').reset();
 
+    //Re-fetch bookmarks
+    fetchBookmarks();
+
+    
+    //Prevent form from submitting
     e.preventDefault();
 }
 
-//delete bookmark
-function deleteBookmark(url) {
-    // get bookmarks from localStorage
-    var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
-    // loop through bookmarks
-    for (i=0; i < bookmarks.length; i++) {
-        if (bookmarks[i].url == url) {
-            bookmarks.splice(i, 1);
+    //Delete Bookmarks
+    function deleteBookmark(url) {
+        //Get bookmarks from local storage
+        var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+        //Loop through bookmarks 
+        for(var i = 0; i < bookmarks.length; i++) {
+            if (bookmarks[i].url == url) {
+                //Remove from array
+                bookmarks.splice(i, 1);
+            }
         }
-    }
-    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
-    // re-fetch bookmarks
-    fetchBookmarks();
-}
+        //Re-set back to localStorage 
+        localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
 
-// fetch bookmarks
+        //Re-fetch bookmarks
+        fetchBookmarks();
+    }
+
+    // fetch bookmarks
 function fetchBookmarks() {
     // get bookmarks from localStorage
     var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
@@ -81,58 +85,20 @@ function fetchBookmarks() {
     }
 }
 
-function validateForm(siteName, siteUrl) {
 
-    var expression = /^((http|https)(:\/\/))?(www.)?(\w+)(.\w{2,6})(.\w{2,6})?$/i
-    var regex = new RegExp(expression);
-
+//Validate Form
+function validateForm(siteName, siteUrl){
     if (!siteName || !siteUrl) {
-        showMessage('Please enter Website Name and URL');
+        alert('Please Fill in the Form');
         return false;
-    } else if (!siteUrl.match(regex)){
-        showMessage('Please enter valid URL');
+    }
+
+     var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+     var regex = new RegExp(expression);
+
+    if(!siteUrl.match(regex)){
+        alert('Please use a valid URL');
         return false;
-    } else {
-        messageCheck();
-        return true;
     }
-}
-
-function fixUrl(url){
-    expression = /^(http:\/\/|https:\/\/)/i
-    var regex = new RegExp(expression);
-    if (!regex.test(url)){
-        return "https://" + url;
-    }
-}
-
-function showMessage(message) {
-
-    messageCheck();
-
-    const jumbotron = document.querySelector('.jumbotron');
-
-    // create div
-    const div = document.createElement('div');
-
-    div.id = "errorMessage";
-    // add classes
-    div.className = `alert alert-danger`;    
-    // add text
-    div.appendChild(document.createTextNode(message));
-    // get myForm
-    const myForm = document.getElementById('myForm');
-    // insert message
-    jumbotron.insertBefore(div, myForm);
-    
-}
-
-function messageCheck() {
-    var check = document.getElementById('errorMessage');
-
-    const jumbotron = document.querySelector('.jumbotron');
-
-    if (check) {
-    jumbotron.removeChild(check);  
-    }  
+    return true;
 }
