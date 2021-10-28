@@ -1,0 +1,26 @@
+body {
+    background: green;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+th {
+  font-size: 1.4rem;
+  background-color: slateblue;
+}
+
+tr {
+  font-size: 1rem;
+}
+
+h1{
+  font-size: 5rem;
+  font-weight: bold;
+  font-family: serif;
+  color: gold;
+  text-align: center;
+}
+
+tbody{
+  background-color: seashell;
+}
