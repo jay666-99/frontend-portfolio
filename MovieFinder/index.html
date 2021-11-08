@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Movie finder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Archivo" rel="stylesheet"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="overlay"><img class="poster-desc"/>
+      <h2 class="title-desc"></h2>
+      <p class="release-date-desc"></p>
+      <p class="desc"></p>
+    </div>
+
+    <h1 class="title">MOVIE FINDER <span class="moviedb"></span></h1>
+    <div class="search-block">
+      <input class="search" type="text" placeholder="Type any movie title" name="movie"/><br/>
+      <div class="search-button" href="movieFinder()">Search</div>
+    </div>
+
+    <h2 class="no-results"></h2>
+    <div class="search-result">
+      <div class="movie-block" id="movie-block0">
+        <h2 class="title" id="title0"></h2><img class="poster" id="poster0"/>
+        <p class="description description0"></p>
+        <p class="release-date" id="release-date0"></p>
+      </div>
+
+      <div class="movie-block" id="movie-block1">
+        <h2 class="title" id="title1"></h2><img class="poster" id="poster1"/>
+        <p class="description description1"></p>
+        <p class="release-date" id="release-date1"></p>
+      </div>
+
+      <div class="movie-block" id="movie-block2">
+        <h2 class="title" id="title2"></h2><img class="poster" id="poster2"/>
+        <p class="description description2"></p>
+        <p class="release-date" id="release-date2"></p>
+      </div>
+
+      <div class="movie-block" id="movie-block3">
+        <h2 class="title" id="title3"></h2><img class="poster" id="poster3"/>
+        <p class="description description3"></p>
+        <p class="release-date" id="release-date3"></p>
+      </div>
+    </div>
+
+  </div>
+</body>
+
+  <script  src="main.js"></script>
+
+</body>
+</html>
