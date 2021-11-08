@@ -1,0 +1,23 @@
+img {
+  width: 100%;
+  border-radius: .4rem .8rem;
+  border: 1px solid #fff;
+
+}
+
+.card, .list-group-item {
+  color: #000;
+}
+
+.card .spec {
+  box-sizing: border-box;
+  padding: 0.5rem;
+  font-weight: normal;
+  font-size: 0.95em;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
